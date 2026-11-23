@@ -4,7 +4,6 @@ const question = document.getElementById('question');
 
 // Function to move the "No" button randomly
 function flyAway() {
-  // Calculate random positions within the browser window bounds
   const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
   const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
 
@@ -16,9 +15,18 @@ function flyAway() {
 noBtn.addEventListener('mouseenter', flyAway);
 noBtn.addEventListener('click', flyAway);
 
-// Sweet success state when clicking "Yes"
+// Sweet success state with a delayed YouTube redirect
 yesBtn.addEventListener('click', () => {
-  question.innerHTML = "Yay! Can't wait! 🥰✨";
-  noBtn.style.display = 'none'; // Hide the no button
-  yesBtn.style.display = 'none'; // Hide the yes button
+  // 1. Change the text to your sweet word/message
+  question.innerHTML = "PALDOOOOOOOOOOOOOO!!!!!!!🥰✨";
+  
+  // 2. Hide both buttons
+  noBtn.style.display = 'none'; 
+  yesBtn.style.display = 'none'; 
+
+  // 3. Wait 1500 milliseconds (1.5 seconds) then redirect to YouTube
+  setTimeout(() => {
+    // Replace this URL with your specific video, playlist, or song link!
+    window.location.href = "https://www.youtube.com/watch?v=CrdVTtHgf48&list=RDCrdVTtHgf48&start_radio=1"; 
+  }, 1500);
 });
