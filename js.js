@@ -1,28 +1,21 @@
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+const jumpscare = document.getElementById('jumpscare');
+const screamSound = document.getElementById('screamSound');
 
-function moveButton() {
-  // Switch to fixed positioning on the first move so it can go anywhere on screen
-  noBtn.style.position = "fixed";
+function triggerJumpscare() {
+  // Reveal the hidden overlay
+  jumpscare.classList.remove('hidden');
+  
+  // Play the loud audio track
+  screamSound.play().catch(error => {
+    console.log("Audio playback failed. Browser required user interaction first.", error);
+  });
 
-  // Calculate max X and Y coordinates so the button stays inside the screen
-  const maxX = window.innerWidth - noBtn.offsetWidth;
-  const maxY = window.innerHeight - noBtn.offsetHeight;
-
-  // Generate random coordinates
-  const randomX = Math.floor(Math.random() * maxX);
-  const randomY = Math.floor(Math.random() * maxY);
-
-  // Apply the new position
-  noBtn.style.left = randomX + "px";
-  noBtn.style.top = randomY + "px";
+  // Optional: Make the screen shake or flash
+  jumpscare.style.animation = "shake 0.5s infinite";
 }
 
-// Trigger movement on desktop hover and mobile tap
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("touchstart", moveButton);
-
-// Optional: Action when clicking Yes
-yesBtn.addEventListener("click", () => {
-  alert("Yay! 🎉");
-});
+// Trigger when they hover OR click 'No'
+noBtn.addEventListener('mouseenter', triggerJumpscare);
+noBtn.addEventListener('click', triggerJumpscare);
