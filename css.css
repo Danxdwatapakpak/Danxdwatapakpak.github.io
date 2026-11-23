@@ -51,5 +51,4 @@ button {
   background-color: #fff;
   color: #ff4d6d;
   border: 2px solid #ff4d6d;
-  position: absolute; /* Crucial for the running away movement */
 }
