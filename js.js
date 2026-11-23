@@ -1,21 +1,24 @@
 const noBtn = document.getElementById('noBtn');
 const yesBtn = document.getElementById('yesBtn');
-const jumpscare = document.getElementById('jumpscare');
-const screamSound = document.getElementById('screamSound');
+const question = document.getElementById('question');
 
-function triggerJumpscare() {
-  // Reveal the hidden overlay
-  jumpscare.classList.remove('hidden');
-  
-  // Play the loud audio track
-  screamSound.play().catch(error => {
-    console.log("Audio playback failed. Browser required user interaction first.", error);
-  });
+// Function to move the "No" button randomly
+function flyAway() {
+  // Calculate random positions within the browser window bounds
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
 
-  // Optional: Make the screen shake or flash
-  jumpscare.style.animation = "shake 0.5s infinite";
+  noBtn.style.left = `${x}px`;
+  noBtn.style.top = `${y}px`;
 }
 
-// Trigger when they hover OR click 'No'
-noBtn.addEventListener('mouseenter', triggerJumpscare);
-noBtn.addEventListener('click', triggerJumpscare);
+// Move the button when hovered or clicked
+noBtn.addEventListener('mouseenter', flyAway);
+noBtn.addEventListener('click', flyAway);
+
+// Sweet success state when clicking "Yes"
+yesBtn.addEventListener('click', () => {
+  question.innerHTML = "Yay! Can't wait! 🥰✨";
+  noBtn.style.display = 'none'; // Hide the no button
+  yesBtn.style.display = 'none'; // Hide the yes button
+});
